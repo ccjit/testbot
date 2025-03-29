@@ -65,7 +65,7 @@ MPP.client.on("a", function (m) {
 	}
   if (c == "!about") {
     send("TestBot - Made by ccjt & TestBot | Programming: ccjt - Ideas: TestBot | This bot is open-source on GitHub and free for you to use. | Made in 2025")
-    send("GitHub page for TestBot: ")
+    send("GitHub page for TestBot: https://github.com/ccjit/testbot/")
   }
   if (c == "!8ball") {
     send(ball[Math.floor(Math.random() * ball.length)])
