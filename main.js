@@ -36,8 +36,6 @@ let ball = [
 	"Outlook not so good",
 	"Very doubtful"
 ]
-// ccjt: R
-// testbot: hello?
 MPP.client.on("a", function (m) {
 	let a = m.a.split(" ");
 	let c = a[0].toLowerCase();
