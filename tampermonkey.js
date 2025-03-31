@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         TestBot - Tampermonkey Version
 // @namespace    https://github.com/ccjit/testbot/blob/main/main.js
-// @version      v1.0-alpha5
+// @version      v1.0-alpha5.5
 // @description  take over the world, not really, much
 // @author       ccjt & Test Account
 // @match        https://multiplayerpiano.net/*
@@ -67,7 +67,6 @@
     MPP.client.on("a", function (m) {
         let a = m.a.split(" ");
         let c = a[0].toLowerCase();
-        a = a.slice(1);
         let substring = function(a){return m.a.substring(a).trim();}
         let send = function(a){MPP.chat.send(a);}
         let kick = function(id, ms) {MPP.client.sendArray([{"m":"kickban","_id":id,"ms":ms}]);}
