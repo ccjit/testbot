@@ -1,11 +1,15 @@
-function kick(id, ms) {
-    MPP.client.sendArray([{
-        "m":"kickban",
-        "_id":id,
-        "ms":ms  
-    }]);
-}
+// dev comments
+/*
+1. kick command [ ]
+2. user change commands (!color, !name...) [ ]
+*/
 
+
+
+let whitelisted = [
+    'bfcd3dabed0ab33cc18cebf5', // ccjt
+    '8703f0cc55518aade8cbcffe' // test account
+]
 let inforesponses = [
     "I didn't even tell you you can't do that! Wait, that's my fault. Just know that this also doesn't work.",
     "Doesn't work.",
@@ -53,6 +57,8 @@ let inforesponses = [
     a = a.slice(1);
       let substring = function(a){return m.a.substring(a).trim();}
       let send = function(a){MPP.chat.send(a);}
+      let kick = function(id, ms) {MPP.client.sendArray([{"m":"kickban","_id":id,"ms":ms}]);}
+    
       // cmds
     if (c == "!fun") {
       send(funresponses[Math.floor(Math.random() * funresponses.length)])
@@ -95,17 +101,22 @@ let inforesponses = [
         }
         }
     }
-    "we'll fix it in post" we'll actually never
-    DO NOT UNCOMMENT FOR GOD'S SAKE
-    */
+    // "we'll fix it in post" we'll actually never
+    // DO NOT UNCOMMENT FOR GOD'S SAKE
+    // */
+    
     if (c == "!help") {
         send("Commands: !userid - Tells your user id | !dice - Returns a random number between 1 and 20 | !8ball - Shake a Magic 8 Ball™ and get a response.")
-        if (m.p.id == MPP.client.participantId) {
-            send("Personal commands: !events - check list of possible events (stackable)")
+        if (m.p.id == MPP.client.participantId || whitelisted.includes(m.p._id)) {
+            send("Personal commands: !events - Check list of possible events (not working)")
+            if (MPP.client.channel.crown.userId == MPP.client.participantId || whitelisted.includes(m.p._id)) {
+                send("Owner commands: !kick - Kicks someone - Usage: !kick [id] [seconds] [one word reason] | !crown - Gives crown to ID - Usage: !crown [id]")
+            }
         }
-    }   
+    } 
+    
     // personal command zone
-    if (m.p.id == MPP.client.participantId) {
+    if (m.p._id == MPP.client.participantId || whitelisted.includes(m.p._id)) {
         if (c == "!events") {
             send("Events: !e - kicks people who say the letter E for 0 minutes | !the - bans the word \"the\" from being sent in chat | !spacebar - kick user who sent a messsge with a space anywhere on it")
         }
@@ -117,6 +128,53 @@ let inforesponses = [
         }
         if (c == "!space") {
             send("No spaces. Nowyou'llhavetotypelikethis.")
+        }
+        if (c == "!name") {
+            MPP.client.sendArray([{
+                "m": "userset",
+                "set": {
+                    "name": substring(5)
+                }
+            }])
+            send()
+        }
+        if (c == "!flashbang") {
+            MPP.client.sendArray([{
+                "m":"chset",
+                "set":{
+                  "color":"#ffffff",
+                  "color2":"#ffffff",
+                }
+            }])
+            setTimeout(() => { MPP.client.sendArray([{
+                "m":"chset",
+                "set":{
+                  "color":"#131313",
+                  "color2":"#131313",
+                }
+            }]) }, 1000);
+            send("get flashbanged idiots")
+        }
+        if (c == "!kick") { 
+            if (MPP.client.channel.crown.userId == MPP.client.participantId || whitelisted.includes(m.p._id)) {
+                let mem = MPP.client.channel.name
+                kick(a[1], parseInt(a[2]))
+                MPP.client.setChannel('test/awkward')
+                send("You've been kicked from " + mem + " for " + a[2] + " minutes. `Reason: " + a[3] + "`")
+                MPP.client.setChannel(mem)
+            } else {
+                send("I don't have crown! Ask @" + MPP.client.channel.crown.userId + " for the crown to use this command.")
+            }
+        }
+        if (c == "!crown") {
+            if (MPP.client.channel.crown.userId == MPP.client.participantId || whitelisted.includes(m.p._id)) {
+                MPP.client.sendArray([{
+                    "m":"chown",
+                    "id":a[1]
+                }]);
+            } else {
+                send("I don't have crown! Ask @" + MPP.client.channel.crown.userId + " for the crown to use this command.")
+            }
         }
     }
     if (m.p._id != MPP.client.participantId) {
