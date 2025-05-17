@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name         TestBot - Tampermonkey Version
 // @namespace    https://ccjit.github.io/my-site
-// @version      v1.0-alpha8
+// @version      v1.0-alpha9
 // @description  take over the world, not really, much
 // @author       ccjt & Test Account
-// @match        https://piano.mpp.community/*
+// @match        https://mpp.7458.space/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=multiplayerpiano.net
 // @grant        none
 // ==/UserScript==
@@ -16,7 +16,8 @@
         let whitelist = [
             'bfcd3dabed0ab33cc18cebf5', // ccjt
             '896c8c5975b93481d11ccb33', // ccjt too
-            '1f2fd4b5d634d96f0a193ae8', // Bot's ID
+            '3514cd3c2e74679c8ab5caaa', // ccjt also
+            '61d75549c90b9e7892ecbca5', // Bot's ID
             '8703f0cc55518aade8cbcffe' // Test Account
         ]
         localStorage.setItem("whitelist", whitelist);
@@ -197,13 +198,13 @@
                   }
               } else {
                       if (a[1] == "info") {
-                          send("!userid - Tells your user id | !about - Bot info OR get info from user - Usage: !about (returns bot info), !about [id] (returns user info)")
+                          send("​!userid - Tells your user id | !about - Bot info OR get info from user - Usage: !about (returns bot info), !about [id] (returns user info)")
                       } else if (a[1] == "fun") {
-                          send("!dice - Returns a random number between 1 and 20 | !8ball - Shake a Magic 8 Ball™ and get a response. | !say -  Makes the bot say something. | !funfact - Tells you a randomly picked fact.")
+                          send("​!dice - Returns a random number between 1 and 20 | !8ball - Shake a Magic 8 Ball™ and get a response. | !say -  Makes the bot say something. | !funfact - Tells you a randomly picked fact.")
                       } else if (whitelisted(id) && a[1] == "owner") {
                           if (crowned()) {
                               send("Owner commands: !kick - Kicks someone - Usage: !kick [id] [seconds] [one word reason] | !crown - Gives crown to ID - Usage: !crown [id] | !say (owner's version) - Makes the bot say something, but with no added text. !oldhelp - Toggles old help command on/off. | !flashbang - Flashbangs everyone without force dark background on. ||[1]||")
-                              send("!setting - Changes a room setting. | !whitelist - Whitelists ID, potentially dangerous. ||[2]||")
+                              send("​!setting - Changes a room setting. | !whitelist - Whitelists ID, potentially dangerous. ||[2]||")
                           } else {
                               send("Owner commands: !say (owner's version) - Makes the bot say something, but with no added text. !oldhelp - Toggles old help command on/off. | !whitelist - Whitelists ID, potentially dangerous.")
                           }
@@ -218,11 +219,11 @@
                   }
           } else {
               send("Commands: !userid - Tells your user id | !dice - Returns a random number between 1 and 20 | !8ball - Shake a Magic 8 Ball™ and get a response. | !say - Makes the bot say what you command it to do | !about - Bot info OR get info from user - Usage: !about (returns bot info), !about [id] (returns user info) ||[1]||")
-              send("!funfact - Tells you a randomly picked fact. ||[2]||")
+              send("​!funfact - Tells you a randomly picked fact. ||[2]||")
               if (whitelisted(id)) {
                   if (whitelisted(id)) {
                       send("Owner commands: !kick - Kicks someone - Usage: !kick [id] [seconds] [one word reason] | !crown - Gives crown to ID - Usage: !crown [id] | !name - Sets the bot name. | !say (owner's version) - Makes the bot say something, but with no added text. !oldhelp - Toggles old help command on/off. ||[1]||")
-                      send("!setting [room setting] - Changes desired room setting. ||[2]||")
+                      send("​!setting [room setting] - Changes desired room setting. ||[2]||")
                       send("Personal commands: !events - Check list of possible events")
                   }
               }
